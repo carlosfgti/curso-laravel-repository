@@ -1,7 +1,9 @@
 <?php
 
-Route::get('admin', function () {
+$this->any('admin/products/search', 'Admin\ProductController@search')->name('products.search');
+$this->resource('admin/products', 'Admin\ProductController');
 
+Route::get('admin', function () {
 })->name('admin');
 
 Route::any('admin/categories/search', 'Admin\CategoryController@search')->name('categories.search');
