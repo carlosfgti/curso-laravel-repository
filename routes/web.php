@@ -1,6 +1,9 @@
 <?php
 
 $this->group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
+    $this->any('users/search', 'UserController@search')->name('users.search');
+    $this->resource('users', 'UserController');
+
     $this->any('products/search', 'ProductController@search')->name('products.search');
     $this->resource('products', 'ProductController');
 
