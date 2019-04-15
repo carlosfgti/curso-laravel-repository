@@ -129,6 +129,17 @@ return [
             'url'         => 'admin/users',
             'icon'        => 'users',
         ],
+        [
+            'text'        => 'Relatórios',
+            'icon'        => 'area-chart',
+            'submenu' => [
+                [
+                    'text'        => 'Meses',
+                    'url'         => 'admin/reports/months',
+                    'icon'        => 'line-chart',
+                ],
+            ]
+        ],
     ],
 
     /*
@@ -165,6 +176,6 @@ return [
     'plugins' => [
         // 'datatables' => true,
         // 'select2'    => true,
-        // 'chartjs'    => true,
+        'chartjs'    => true,
     ],
 ];

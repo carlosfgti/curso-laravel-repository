@@ -8,7 +8,8 @@ use App\Repositories\Contracts\{
     CategoryRepositoryInterface,
     ProductRepositoryInterface,
     ChartRepositoryInterface,
-    UserRepositoryInterface
+    UserRepositoryInterface,
+    ReportsRepositoryInterface
 };
 
 use App\Repositories\Core\Eloquent\{
@@ -19,7 +20,8 @@ use App\Repositories\Core\Eloquent\{
 };
 
 use App\Repositories\Core\QueryBuilder\{
-    QueryBuilderCategoryRepository
+    QueryBuilderCategoryRepository,
+    QueryBuilderReportsRepository
 };
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -60,6 +62,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             UserRepositoryInterface::class,
             EloquentUserRepository::class
+        );
+
+        $this->app->bind(
+            ReportsRepositoryInterface::class,
+            QueryBuilderReportsRepository::class
         );
     }
 }
