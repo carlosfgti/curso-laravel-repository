@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Charts\ReportsChart;
 use App\Repositories\Contracts\ReportsRepositoryInterface;
+use App\Enum\Enum;
 
 class ReportsController extends Controller
 {
@@ -18,20 +19,7 @@ class ReportsController extends Controller
 
     public function months(ReportsChart $chart)
     {
-        $chart->labels([
-            'Janeiro',
-            'Fevereiro',
-            'Março',
-            'Abril',
-            'Maio',
-            'Junho',
-            'Julho',
-            'Agosto',
-            'Setembro',
-            'Outubro',
-            'Novembro',
-            'Dezembro',
-        ]);
+        $chart->labels(Enum::months());
 
         $chart->dataset('2017', 'bar', $this->repository->byMonths(2017));
 
@@ -39,6 +27,13 @@ class ReportsController extends Controller
         ->options([
             'backgroundColor' => '#999'
         ]);
+
+        return view('admin.charts.chart', compact('chart'));
+    }
+
+    public function months2()
+    {
+        $chart = $this->repository->getReports(2016, 2018);
 
         return view('admin.charts.chart', compact('chart'));
     }

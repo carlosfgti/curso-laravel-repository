@@ -3,7 +3,8 @@
 $this->group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
     // Reports
-    $this->get('reports/months', 'ReportsController@months')->name('reports.months');
+    // $this->get('reports/months', 'ReportsController@months')->name('reports.months');
+    $this->get('reports/months', 'ReportsController@months2')->name('reports.months');
 
     $this->any('users/search', 'UserController@search')->name('users.search');
     $this->resource('users', 'UserController');

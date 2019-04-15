@@ -5,6 +5,8 @@ namespace App\Repositories\Core\QueryBuilder;
 use DB;
 use App\Repositories\Core\BaseQueryBuilderRepository;
 use App\Repositories\Contracts\ReportsRepositoryInterface;
+use App\Charts\ReportsChart;
+use App\Enum\Enum;
 
 class QueryBuilderReportsRepository extends BaseQueryBuilderRepository implements ReportsRepositoryInterface
 {
@@ -28,5 +30,28 @@ class QueryBuilderReportsRepository extends BaseQueryBuilderRepository implement
         */
 
         return $dataset;
+    }
+
+    public function getReports(int $yearStart = null, int $yearEnd = null, String $type = 'bar')
+    {
+        $chart = app(ReportsChart::class);
+
+        $yearStart = $yearStart ?? date('Y') - 3;
+        $yearEnd = $yearEnd ?? date('Y');
+
+        $chart->labels(Enum::months());
+
+        for ($year=$yearStart; $year <= $yearEnd; $year++) { 
+            $color = '#' . dechex(rand(0x000000, 0xFFFFFF));
+            
+
+            $chart->dataset($year, $type, $this->byMonths($year))
+                    ->options([
+                        'color'             => $color,
+                        'backgroundColor'   => $color
+                    ]);;
+        }
+
+        return $chart;
     }
 }
