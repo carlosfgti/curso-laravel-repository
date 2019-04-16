@@ -138,6 +138,11 @@ return [
                     'url'         => 'admin/reports/months',
                     'icon'        => 'line-chart',
                 ],
+                [
+                    'text'        => 'Anual',
+                    'url'         => 'admin/reports/years',
+                    'icon'        => 'pie-chart',
+                ],
             ]
         ],
     ],

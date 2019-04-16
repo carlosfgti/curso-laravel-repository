@@ -37,4 +37,30 @@ class ReportsController extends Controller
 
         return view('admin.charts.chart', compact('chart'));
     }
+
+    public function year(ReportsChart $chart)
+    {
+        $response = $this->repository->getDataYears();
+
+        $chart->labels($response['labels'])
+                ->dataset('Relatórios de vendas', 'bar', $response['values'])
+                // ->dataset('Relatórios de vendas', 'line', $response['values'])
+                ->color('black')
+                ->backgroundColor($response['backgrounds']);
+                // ->backgroundColor('blue');
+
+        $chart->options([
+            'scales' => [
+                'yAxes' => [
+                    [
+                        'ticks' => [
+                            'callback' => $chart->rawObject('myCallback')
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+
+        return view('admin.charts.chart', compact('chart'));
+    }
 }

@@ -27,4 +27,15 @@
 
 @push('js')
 {!! $chart->script() !!}
+
+<script>
+    let myCallback = (value, index, values) => numberToReal(value);
+  
+    let numberToReal = (value) => {
+      let number = value.toFixed(2).split('.');
+      number[0] = 'R$ ' + number[0].split(/(?=(?:...)*$)/).join('.');
+      
+      return number.join(',');
+    }
+  </script>
 @endpush
