@@ -143,6 +143,11 @@ return [
                     'url'         => 'admin/reports/years',
                     'icon'        => 'pie-chart',
                 ],
+                [
+                    'text'        => 'Vue.js',
+                    'url'         => 'admin/reports/vue',
+                    'icon'        => 'bar-chart',
+                ],
             ]
         ],
     ],

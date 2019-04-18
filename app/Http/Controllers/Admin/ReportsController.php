@@ -63,4 +63,9 @@ class ReportsController extends Controller
 
         return view('admin.charts.chart', compact('chart'));
     }
+
+    public function vue()
+    {
+        return view('admin.charts.vue');
+    }
 }

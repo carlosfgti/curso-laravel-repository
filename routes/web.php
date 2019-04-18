@@ -3,6 +3,7 @@
 $this->group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
     // Reports
+    $this->get('reports/vue', 'ReportsController@vue')->name('reports.vue');
     $this->get('reports/years', 'ReportsController@year')->name('reports.year');
     // $this->get('reports/months', 'ReportsController@months')->name('reports.months');
     $this->get('reports/months', 'ReportsController@months2')->name('reports.months');

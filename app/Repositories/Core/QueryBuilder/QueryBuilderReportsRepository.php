@@ -81,4 +81,32 @@ class QueryBuilderReportsRepository extends BaseQueryBuilderRepository implement
             'backgrounds'   => $backgrounds,
         ];
     }
+
+
+    public function getReportsMonthByYear(int $year):array
+    {
+        $data = $this->db
+                    ->table($this->tb)
+                    ->select(
+                        DB::raw('sum(total) as total'),
+                        DB::raw("EXTRACT(MONTH from date) as months")
+                    )
+                    ->groupBy(DB::raw('MONTH(date)'))
+                    ->whereYear('date', $year)
+                    ->get();
+
+        $backgrounds = $data->map(function ($value, $key) {
+            return '#' . dechex(rand(0x000000, 0xFFFFFF));
+        });
+
+        $values = $data->map(function ($order, $key) {
+            return number_format($order->total, 0, '', '');
+        });
+
+        return [
+            'labels'        => $data->pluck('months'),
+            'values'        => $values, // $data->pluck('total'),
+            'backgrounds'   => $backgrounds,
+        ];
+    }
 }
